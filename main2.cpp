@@ -42,18 +42,18 @@ int n_queens(int n) {
       queens.pop();
       --filled;
       if (!queens.empty())
-	queens.top().x += 1;
+        queens.top().x += 1;
     } else if (queens_conflict(queens)) {
       queens.top().x += 1;
     } else {
       ++filled;
       if (filled == n) {
-	++solutions;
-	queens.top().x += 1;
-	--filled;
+        ++solutions;
+        queens.top().x += 1;
+        --filled;
       } else {
-	Queen next_queen(1, queens.top().y + 1);
-	queens.push(next_queen);
+        Queen next_queen(1, queens.top().y + 1);
+        queens.push(next_queen);
       }
     }
   }

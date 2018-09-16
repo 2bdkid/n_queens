@@ -44,7 +44,7 @@ bool n_queens(int n) {
       queens.pop();
       --filled;
       if (!queens.empty())
-	queens.top().x += 1;
+        queens.top().x += 1;
     } else if (queens_conflict(queens)) {
       queens.top().x += 1;
     } else {
