@@ -9,7 +9,6 @@ struct Queen {
   int y;
 };
 
-/// returns true if the top queen is in conflict with any other queen
 bool queens_conflict(std::stack<Queen> queens) {
   Queen top_queen = queens.top();
   queens.pop();
@@ -31,13 +30,12 @@ bool queens_conflict(std::stack<Queen> queens) {
   return false;
 }
 
-/// returns true if n queens will fit on an nxn chessboard
-/// such that no two queens may attack the other
-bool n_queens(int n) {
+int n_queens(int n) {
   std::stack<Queen> queens;
   queens.push(Queen(1, 1));
 
   int filled = 0;
+  int solutions = 0;
   
   while (queens.size() != 0) {
     if (queens.top().x > n) {
@@ -49,21 +47,22 @@ bool n_queens(int n) {
       queens.top().x += 1;
     } else {
       ++filled;
-      if (filled == n) return true;
-      Queen next_queen(1, queens.top().y + 1);
-      queens.push(next_queen);
+      if (filled == n) {
+	++solutions;
+	queens.top().x += 1;
+	--filled;
+      } else {
+	Queen next_queen(1, queens.top().y + 1);
+	queens.push(next_queen);
+      }
     }
   }
 
-  // no solution found
-  return false;
+  return solutions;
 }
 
 int main() {
-  for (int i = 1; i < 100; ++i) {
-    if (n_queens(i))
-      std::cout << i << ": yes\n";
-    else
-      std::cout << i << ": no\n";
-  }
+   for (int i = 1; i < 29; ++i) {
+     std::cout << "n_queens(" << i << ") = " << n_queens(i) << '\n';
+   }
 }
