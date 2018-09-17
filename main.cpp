@@ -50,7 +50,6 @@ bool n_queens(int n) {
     } else if (queens_conflict(queens)) {
       // try next position      
       queens.top().x += 1;
-      //
     } else {
       // check if board is full, otherwise put next queen on
       ++filled;
