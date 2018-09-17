@@ -38,16 +38,21 @@ bool n_queens(int n) {
   queens.push(Queen(1, 1));
 
   int filled = 0;
-  
+
+  // empty stack indicates no solution
   while (queens.size() != 0) {
     if (queens.top().x > n) {
+      // backtrack      
       queens.pop();
       --filled;
       if (!queens.empty())
         queens.top().x += 1;
     } else if (queens_conflict(queens)) {
+      // try next position      
       queens.top().x += 1;
+      //
     } else {
+      // check if board is full, otherwise put next queen on
       ++filled;
       if (filled == n) return true;
       Queen next_queen(1, queens.top().y + 1);
@@ -60,10 +65,13 @@ bool n_queens(int n) {
 }
 
 int main() {
-  for (int i = 1; i < 100; ++i) {
-    if (n_queens(i))
-      std::cout << i << ": yes\n";
-    else
-      std::cout << i << ": no\n";
+  int n;
+  std::cout << "N-Queens where n is: ";
+  std::cin >> n;
+
+  if (n_queens(n)) {
+    std::cout << "Solution exists\n";
+  } else {
+    std::cout << "No solution exists\n";
   }
 }
