@@ -32,7 +32,7 @@ bool queens_conflict(std::stack<Queen> queens) {
 
 int n_queens(int n) {
   std::stack<Queen> queens;
-  queens.push(Queen(1, 1));
+  queens.emplace(1, 1);
 
   int filled = 0;
   int solutions = 0;
@@ -52,8 +52,7 @@ int n_queens(int n) {
         queens.top().x += 1;
         --filled;
       } else {
-        Queen next_queen(1, queens.top().y + 1);
-        queens.push(next_queen);
+	queens.emplace(1, queens.top().y + 1);
       }
     }
   }

@@ -35,7 +35,7 @@ bool queens_conflict(std::stack<Queen> queens) {
 /// such that no two queens may attack the other
 bool n_queens(int n) {
   std::stack<Queen> queens;
-  queens.push(Queen(1, 1));
+  queens.emplace(1, 1);
 
   int filled = 0;
 
@@ -54,8 +54,7 @@ bool n_queens(int n) {
       // check if board is full, otherwise put next queen on
       ++filled;
       if (filled == n) return true;
-      Queen next_queen(1, queens.top().y + 1);
-      queens.push(next_queen);
+      queens.emplace(1, queens.top().y + 1);
     }
   }
 
